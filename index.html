@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+		<link rel="shortcut icon" href="./public/favicon.ico">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<title>Konnichiwa Sophia!</title>
+	</head>
+	<body>
+		<div id="background-container" class="bg">
+			<div id="container-container">
+				<div id="content-container">
+					<h1 id="title">Konnichiwa Sophia!</h1>
+					<h4>Sending you all the love from your favorite homies! Click one of the buttons to get some kind words from a loved one.</h4>
+					<div id="content">
+						<div id="buttons">
+							<span class="jar-button">
+								<input id="motivate-btn" type="image" src="./public/jar.png">
+								<h4>for inspo</h4>
+							</span>
+							<span class="jar-button">
+								<input id="homesick-btn" type="image" src="./public/jar.png">
+								<h4>gimme memz</h4>
+							</span>
+							<span class="jar-button">
+								<input id="pump-up-btn" type="image" src="./public/jar.png">
+								<h4>so matcha fun!</h4>
+							</span>
+						</div>
+						<p id="motivate-quote"></p>
+						<p id="homesick-quote"></p>
+						<p id="pump-up-quote"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var motivation = [
+				`"Like I always tell my middle school students - 'Life is hard so sometimes we punch it in the dick and laugh in its stupid fucking face'" - Jackson/J*`,
+				`"If you're going through hell, keep going." - Winston Churchill`,
+				`"My favorite centering thought is that 'progress is progress even when it still feels like shit.' When you're down, look back at your other downs and notice when this time is a little less shitty than last time. That's how you move forward. :)" - Daniela`,
+				`"Inaction breeds doubt and fear. Action breeds confidence and courage. If you want to conquer fear, do not sit home and think about it. Go out and get busy." - Dale Carnegie`,
+				`"Limitations live only in our minds. But if we use our imaginations, our possibilities become limitless." - Jamie Paolinetti`,
+				`"As we've learned, the best Martuni's nights are the times you force yourself to get up there to sing, so get out there and be bold!" - Jeff`,
+				`"You are a special human being. Basic bitch 90s Americana societal philosophy tells everyone that they are special, but statistically, they are not. It is literally impossible for every organism on this planet to be special based on the unique properties of being themselves, yet you have already crushed it in this sector. You are an outlier on the bell curve, so here is my limited advice/words of shitty wisdom at my age.
+
+					(1) If it's become easy, your growth rate has slowed - and at some point, you might be okay with that / that might be what's best. Don't take ease as a bad thing though... it also ebbs and flows and sometimes you need to chill and recalibrate before going HAM again ❤️
+					(2) Your true friends will always be your friends. This goes past job titles, social standing... and even time will tell. Your interactions may be different due to life events (age, jobs, babies, moves, deaths, cult-joinings, crossfit/SoulCycle addictions, etc etc) , but if your soul "sees" another soul - you'll search for and adapt to new forms of communication to keep connecting.  I think you already know this as you are wise beyond your years. But, please see point 3
+					(3) I have no advice to dump on you because you intuitively know it all - your journey is less about calibrating your compass (it's fine-tuned), and more about figuring out when you want to listen and when it's worth going rogue." - Euni`,
+				`"I believe in you. Do not doubt yourself in this time." - Lily`,
+				`"COACHES DON'T PLAY" - Lily`,
+				`"Sometimes, for motivation, I don't try to aggressively cheer myself but dive into a story and explore. Here's one: https://www.newyorker.com/magazine/2014/03/03/the-largesse-of-the-sea-maiden. You are important." - Lily`,
+				`"Sophia, you are the epitome of growth mindset!! When things get rough, you’re always the shining beacon of optimism and hope that I look to! With your spirit and positive attitude, you can do anything ❤️" - Shreya`,
+				`"Sometimes the darkest nights produce the brightest stars. I think I got that from Bumblebee haha. Hope you get to see some beautiful ass stars!" - Chloe`,
+				`"The secret for harvesting from existence the greatest fruitfulness and the greatest enjoyment is: to live dangerously! Build your cities on the slopes of Vesuvius!" -Nietzsche`,
+				`"Imma keep running cause a winner don't quit on themselves." - Beyonce`,
+				`"The sun'll come out / Nothing good ever comes easy / I know times are rough / But winners don't quit / So don't you give up" - Kali Uchis (https://www.youtube.com/watch?v=9f5zD7ZSNpQ)`,
+				`"Not all who wander are lost." - J.R.R. Tolkien`,
+				`"Promise me you'll always remember: you're braver than you believe, and stronger than you seem, and smarter than you think." - Christopher Robin to Winne the Pooh`,
+				`"Go confidently in the direction of your dreams. Live the life you have imagined." - Henry David Thoreau`,
+				`”Always look to the positive and never nod your head, for the water will engulf us if we do not dare to tread.” - De la Soul`,
+				`"Fear and faith don’t co-exist" - Felicia Horowitz`,
+				`"Better to do something imperfectly than to do nothing perfectly." - Robert H. Schuller`,
+				`“Challenges are gifts that force us to search for a new center of gravity. Don’t fight them. Just find a new way to stand.” - Oprah Winfrey`,
+				`"Float like a butterfly, sting like a bee." - Muhammad Ali`,
+				`"If it doesn’t challenge you, it doesn’t change you." - Fred DeVito`
+			];
+
+			var homesickness = [
+				`"J-Star is definitely the best nickname I've ever gotten, and I'll never forget when I visited you in Munich and all your German roommates started calling me that!" - J*`,
+				`"You're the only person I've seen successfully implement a well-thought-out plan to become more spontaneous." - Jackson`,
+				`"The stars you see, are the same stars your fiends and family see. Shared experiences triumph over the distance." - Jeff`,
+				`"You are loved, bug." - Euni`,
+				`"Text me Coupon code: FACEOFF for a weird selfie of my weird face. (valid up to 5 times)" - Lily (tbh also Fran)`,
+				`"SF is not the same without you but we’re so proud of you doing great things in Japan!! Can’t wait until I see your beautiful self again :)" - Shreya`,
+				`"Don't ever forget - 'Life is the bubbles!!'" - Chloe`,
+				`"Anytime you need a pick me up, call me up, we’ll go dancing ;)." - Nico`,
+				`"Anytime you need a sneaky/embarrassing photo of lily, hit me up!" - Nico`,
+				`"Any time you need a hug, pretend we're back in this cuddle puddle: https://drive.google.com/open?id=18cHQ8ZeAaFGr12e9AFa0aVIUv0dPjSgK" - Fran`,
+				`"My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor and some style." - Maya Angelou `,
+				`"~your vibe attracts your tribe~" - Christine Tran`,
+				`"health is wealth <3" - Christine Tran`
+			];
+
+			var pumpUp = [
+				`"Get hype!  And don't shy away from letting people know your dick is out." - Jeff`,
+				`"I will smack you if you don't take that shot of sake Soph." - Euni`,
+				`"U up? About to go out? Here's a quick blogilates first:  https://www.youtube.com/watch?v=G3HT9B4-fbk" - Lily`,
+				`"https://www.youtube.com/watch?v=D9g2szHsoz0" - Dan`,
+				`"Leeegggoooo fam!!!" - Nico`,
+				`"When life gives you lemons... find someone with vodka and throw a party"`,
+				`"https://www.youtube.com/watch?v=k4YRWT_Aldo" - Fran`
+			]
+
+			var getRandomArbitrary = function(min, max) {
+			    return Math.floor(Math.random() * (max - min + 1)) + min;
+			};
+
+			var getRandomMotivation = function() {
+				return motivation[getRandomArbitrary(0, motivation.length)];
+			};
+
+		    var getRandomHomesickness = function() {
+				return homesickness[getRandomArbitrary(0, homesickness.length)];
+			};
+
+		    var getRandomPumpUp = function() {
+				return pumpUp[getRandomArbitrary(0, pumpUp.length)];
+			};
+
+			$("#motivate-btn").click(function() {
+				var quote = getRandomMotivation();
+				$("#motivate-quote").text(quote);
+				$("#homesick-quote").text("");
+				$("#pump-up-quote").text("");
+			});
+
+			$("#homesick-btn").click(function() {
+				var quote = getRandomHomesickness();
+				$("#homesick-quote").text(quote);
+				$("#motivate-quote").text("");
+				$("#pump-up-quote").text("");
+			});
+
+			$("#pump-up-btn").click(function() {
+				var quote = getRandomPumpUp();
+				$("#pump-up-quote").text(quote);
+				$("#homesick-quote").text("");
+				$("#motivate-quote").text("");
+			});
+
+
+
+		</script>
+	</body>
+</html>
